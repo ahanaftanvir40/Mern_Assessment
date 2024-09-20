@@ -55,7 +55,7 @@ export default function Home() {
     try {
       const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/animals`)
       setAnimals(response.data);
-      setFilteredAnimals(response.data.filter((animal: any) => animal.category === activeCategory));
+      setFilteredAnimals(response.data.filter((animal: Animal) => animal.category === activeCategory));
     } catch (error) {
       console.error('Error fetching animals:', error);
     }
