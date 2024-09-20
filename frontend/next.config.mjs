@@ -4,6 +4,9 @@ const nextConfig = {
         remotePatterns: [
             {
                 hostname: 'localhost'
+            },
+            {
+                hostname: 'mernassessment-production.up.railway.app'
             }
         ]
     }

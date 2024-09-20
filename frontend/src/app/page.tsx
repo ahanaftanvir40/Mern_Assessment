@@ -1,7 +1,6 @@
 'use client'
 import { useState } from 'react';
 import Image from 'next/image';
-import dummy from '@/app/assets/Group.png';
 import AddAnimalModal from '@/app/components/modals/AddAnimalModal';
 import AddCategoryModal from './components/modals/AddCategoryModal';
 import axios from 'axios';
@@ -42,7 +41,7 @@ export default function Home() {
 
   const fetchCategories = async () => {
     try {
-      const response = await axios.get('http://localhost:8000/api/categories')
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/categories`)
       setCategories(response.data);
       if (response.data.length > 0) {
         setActiveCategory(response.data[0].name);
@@ -54,7 +53,7 @@ export default function Home() {
 
   const fetchAnimals = async () => {
     try {
-      const response = await axios.get('http://localhost:8000/api/animals')
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/animals`)
       setAnimals(response.data);
       setFilteredAnimals(response.data.filter((animal: any) => animal.category === activeCategory));
     } catch (error) {
@@ -112,7 +111,7 @@ export default function Home() {
             <div key={animal.id} className="flex flex-col justify-center items-center">
               <div className="w-[160px] h-[191px] bg-[#050505] border border-[#141414] rounded-[8px]">
                 <div className="w-full h-full flex items-center justify-center">
-                  <Image src={`http://localhost:8000/uploads/${animal.imageUrl}`} alt={animal.name} width={100} height={100} />
+                  <Image src={`${process.env.NEXT_PUBLIC_API_URL}/uploads/${animal.imageUrl}`} alt={animal.name} width={100} height={100} />
                 </div>
               </div>
               <div className="pt-2">

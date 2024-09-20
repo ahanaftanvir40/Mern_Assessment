@@ -20,7 +20,7 @@ interface AddAnimalModalProps {
 
 
 export default function AddAnimalModal({ isOpen, onClose, fetchAnimals, categories }: AddAnimalModalProps) {
-    if (!isOpen) return null;
+
 
     const router = useRouter()
     const fileRef = useRef<HTMLInputElement>(null)
@@ -75,7 +75,7 @@ export default function AddAnimalModal({ isOpen, onClose, fetchAnimals, categori
         formData.append("image", fileRef.current.files[0]);
 
         try {
-            const response = await axios.post('http://localhost:8000/api/addAnimal', formData, {
+            const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/addAnimal`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
@@ -94,7 +94,7 @@ export default function AddAnimalModal({ isOpen, onClose, fetchAnimals, categori
 
 
 
-
+    if (!isOpen) return null;
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">

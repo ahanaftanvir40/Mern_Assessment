@@ -15,7 +15,7 @@ interface AddCategoryModalProps {
 }
 
 export default function AddCategoryModal({ isOpen, onClose, fetchCategories }: AddCategoryModalProps) {
-    if (!isOpen) return null;
+
 
     const modalRef = useRef<HTMLDivElement>(null)
     const [categoryName, setCategoryName] = useState("");
@@ -46,7 +46,7 @@ export default function AddCategoryModal({ isOpen, onClose, fetchCategories }: A
         }
 
         try {
-            const response = await axios.post('http://localhost:8000/api/addCategory', { name: categoryName });
+            const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/addCategory`, { name: categoryName });
             console.log('Category added:', response.data);
             fetchCategories()
             onClose();
@@ -56,7 +56,7 @@ export default function AddCategoryModal({ isOpen, onClose, fetchCategories }: A
         }
     };
 
-
+    if (!isOpen) return null;
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
